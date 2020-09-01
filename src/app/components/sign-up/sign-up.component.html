@@ -1,0 +1,41 @@
+<h2>Sign Up</h2>
+<form [formGroup]="signUpForm" (ngSubmit)="onSubmit()">
+  <div class="form-group">
+    <label>Email</label>
+    <input type="email" formControlName="email" class="form-control"
+           [ngClass]="{'is-invalid': submitted}"/>
+    <div *ngIf="submitted" class="invalid-feedback">
+      <div *ngIf="signUpForm.value.email.invalid">Email is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Login</label>
+    <input type="text" formControlName="login" class="form-control"
+           [ngClass]="{'is-invalid': submitted}"/>
+    <div *ngIf="submitted" class="invalid-feedback">
+      <div *ngIf="signUpForm.value.login.invalid">Login is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>Password</label>
+    <input type="password" formControlName="password" class="form-control"
+           [ngClass]="{ 'is-invalid': submitted }"/>
+    <div *ngIf="submitted" class="invalid-feedback">
+      <div *ngIf="signUpForm.value.password.invalid">Password is required</div>
+    </div>
+  </div>
+  <div class="form-group">
+    <label>First Name</label>
+    <input type="text" formControlName="firstName" class="form-control"
+           [ngClass]="{'is-invalid': submitted}"/>
+  </div>
+  <div class="form-group">
+    <label>Last Name</label>
+    <input type="text" formControlName="lastName" class="form-control"
+           [ngClass]="{'is-invalid': submitted}"/>
+  </div>
+  <div class="form-group">
+    <button [disabled]="!signUpForm.valid" class="btn btn-primary">Sign Up</button>
+  </div>
+  <div *ngIf="error" class="error-form">{{error}}</div>
+</form>

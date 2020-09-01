@@ -1,0 +1,50 @@
+<h3>Search Form</h3>
+<form [formGroup]="searchForm" (ngSubmit)="searchEmployers()" novalidate>
+  <div class="form-group">
+    <mz-input-container>
+      <input mz-input
+             [label]="'Search'"
+             formControlName="search"
+             [validate]="true"
+             placeholder="Enter text"
+             length="30"
+             type="text">
+    </mz-input-container>
+  </div>
+
+  <button class="btn btn-primary" type="submit">Search</button>
+</form>
+
+
+<a routerLink="/employer/create" class="create-employer-button" mz-button>Create Employer</a>
+<br/>
+<table class="striped">
+  <thead>
+  <th>Id</th>
+  <th>Name</th>
+  <th>Active</th>
+  <th>Department Name</th>
+  <th>Actions</th>
+  </thead>
+  <tbody>
+  <tr *ngFor="let employer of employers">
+    <td>{{employer.id}}</td>
+    <td>{{employer.name}}</td>
+    <td>{{employer.active}}</td>
+    <td>{{employer.departmentName}}</td>
+    <td>
+      <a routerLink="/employer/{{employer.id}}" class="btn">Show Employer</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+
+<br/>
+<mz-pagination *ngIf="employers && employers.length"
+               (pageChange)="getEmployersByPage($event)"
+               [currentPage]="page"
+               [enableFirstAndLastPageButtons]="false"
+               [itemsPerPage]="limit"
+               [totalItems]="total"
+>
+</mz-pagination>

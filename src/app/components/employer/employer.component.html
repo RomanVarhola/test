@@ -1,0 +1,51 @@
+<mz-card class="blue-grey darken-1 white-text" [horizontal]="true" *ngIf="employer">
+  <mz-card-title>
+    Name: {{employer.name}}
+  </mz-card-title>
+  <mz-card-content>
+    Active: {{employer.active}} <br>
+    Department Name: {{employer.departmentName}}
+  </mz-card-content>
+  <mz-card-action>
+    <a routerLink="/employers">Go to employers</a>
+    <a mz-button (click)="deleteEmployer()">Delete employer</a>
+  </mz-card-action>
+</mz-card>
+
+<h1>Employer Form</h1>
+
+<form [formGroup]="employerForm" (ngSubmit)="submitForm()" novalidate>
+  <div class="form-group">
+    <mz-input-container>
+      <input mz-input
+        [label]="'Name'"
+        formControlName="name"
+        [validate]="true"
+        placeholder="Enter name"
+        length="30"
+        type="text">
+    </mz-input-container>
+  </div>
+  <div class="form-group">
+    <mz-input-container>
+      <input mz-input
+             [label]="'Active'"
+             formControlName="active"
+             id="active"
+             placeholder="Active"
+             type="checkbox">
+    </mz-input-container>
+  </div>
+    <div class="form-group">
+      <mat-form-field>
+        <mat-label>Department Name</mat-label>
+        <mat-select formControlName="departmentId">
+          <mat-option *ngFor="let department of departments" [value]="department.id">
+            {{department.name}}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
+    </div>
+  <br><br>
+  <button class="btn btn-primary" [disabled]="!employerForm.valid" type="submit">Submit</button>
+</form>
